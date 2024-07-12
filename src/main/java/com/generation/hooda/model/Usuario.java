@@ -12,29 +12,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_categorias")
-public class Categoria {
-
+@Table(name= "tb_usuarios")
+public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotBlank(message = "O Atributo nome é obrigatório")
-	@Size(min = 3, max = 100, message = "O atributo nome deve conter no mínimo 3 e no maximo 100 caracteres")
-	private String nome;
-
-	@NotBlank(message = "O Atributo descrição é obrigatório")
-	@Size(min = 10, max = 500, message = "O atributo descrição deve conter no minimo 10 e no maximo 500 caracteres")
-	private String descricao;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("tema")
+	@NotBlank(message = "O atributo Nome é Obrigatório")
+	@Size(min = 3, max = 150, message = "O Nome deve conter no mínimo 3 e no máximo 150 caracteres")
+	private String nome;
+	
+	@Email
+	private String email;
+		
+	
+	private String foto;
+	
+	@NotBlank(message = "O atributo Senha é Obrigatório")
+	@Size(min = 8, message = "O Senha deve conter no mínimo 8 caracteres")
+	private String senha;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
 	private List<Produto> produto;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,12 +58,28 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public List<Produto> getProduto() {
@@ -66,7 +89,4 @@ public class Categoria {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
-	
-	
-
 }
