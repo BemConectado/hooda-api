@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.generation.hooda.utils.ValidaPreco;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Produto {
 	@Size(min = 3, max = 100, message = "O atributo nome deve conter no mínimo 3 e no maximo 100 caracteres")
 	private String nome;
 	
-	@NotBlank(message = "O Atributo Preço é obrigatório" )
+	@ValidaPreco
 	@Digits(integer = 4, fraction = 2)
 	private BigDecimal preco;
 	
