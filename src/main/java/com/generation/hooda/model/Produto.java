@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.generation.hooda.utils.ValidaPreco;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
@@ -28,7 +28,7 @@ public class Produto {
 	@Size(min = 3, max = 100, message = "O atributo nome deve conter no mínimo 3 e no maximo 100 caracteres")
 	private String nome;
 	
-	@ValidaPreco
+	@NotNull
 	@Digits(integer = 4, fraction = 2)
 	private BigDecimal preco;
 	
@@ -39,7 +39,7 @@ public class Produto {
 	@NotBlank(message = "O Atributo imagem é obrigatório")
 	private String imagem;
 	
-	@NotBlank(message = "O Atributo estoque é obrigatório" )
+	@NotNull(message = "O Atributo estoque é obrigatório" )
 	private int estoque;
 	
 	private int avaliacao;
@@ -63,6 +63,10 @@ public class Produto {
 
 	public BigDecimal getPreco() {
 		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	public String getDescricao() {
