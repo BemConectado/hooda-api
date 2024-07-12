@@ -14,10 +14,6 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-//Dev 2 Gabriel:
-//Definir os atributos da Classe Model Produto;
-//Relacionar a Classe Model Produto com a Classe Model Categoria;
-
 
 @Entity
 @Table(name = "tb_produtos")
@@ -49,7 +45,11 @@ public class Produto {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
-	private Categoria  categoria;
+	private Categoria categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
 	
 
 	public Long getId() {
@@ -86,6 +86,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	
