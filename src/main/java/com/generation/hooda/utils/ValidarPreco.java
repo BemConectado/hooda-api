@@ -3,10 +3,12 @@ package com.generation.hooda.utils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ValidarPreco implements ConstraintValidator<ValidaPreco, Double> {
+import java.math.BigDecimal;
+
+public class ValidarPreco implements ConstraintValidator<ValidaPreco, BigDecimal> {
 
     @Override
-    public boolean isValid(Double preco, ConstraintValidatorContext context) {
-        return preco != null && preco > 0;
+    public boolean isValid(BigDecimal preco, ConstraintValidatorContext context) {
+        return preco != null && preco.compareTo(BigDecimal.ZERO) > 0;
     }
 }
