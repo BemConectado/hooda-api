@@ -4,13 +4,14 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.generation.hooda.utils.ValidaPreco;
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,8 +29,8 @@ public class Produto {
 	@Size(min = 3, max = 100, message = "O atributo nome deve conter no mínimo 3 e no maximo 100 caracteres")
 	private String nome;
 	
-	@NotNull
-	@Digits(integer = 4, fraction = 2)
+	@ValidaPreco
+	@Column(name = "preco", columnDefinition = "DECIMAL(10,2)")
 	private BigDecimal preco;
 	
 	@NotBlank(message = "O Atributo descrição é obrigatório")
@@ -51,14 +52,22 @@ public class Produto {
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Usuario usuario;
-	
+
 
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public BigDecimal getPreco() {
@@ -73,16 +82,32 @@ public class Produto {
 		return descricao;
 	}
 
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public String getImagem() {
 		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public int getEstoque() {
 		return estoque;
 	}
 
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
+	}
+
 	public int getAvaliacao() {
 		return avaliacao;
+	}
+
+	public void setAvaliacao(int avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	public Categoria getCategoria() {
