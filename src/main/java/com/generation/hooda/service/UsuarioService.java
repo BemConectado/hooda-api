@@ -8,11 +8,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.hooda.model.Usuario;
 import com.generation.hooda.model.UsuarioLogin;
+import com.generation.hooda.repository.UsuarioRepository;
 
 public class UsuarioService {
 
@@ -59,7 +59,7 @@ public class UsuarioService {
 		return Optional.empty();
 	}
 
-	public Optional<UsuarioLogn> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
+	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 		
 		// Gera o Objeto de autenticação
 		var credenciais = new UsernamePasswordAuthenticationToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
