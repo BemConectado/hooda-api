@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generation.hooda.model.UsuarioLogin;
 import com.generation.hooda.model.Usuario;
+import com.generation.hooda.model.UsuarioLogin;
 import com.generation.hooda.repository.UsuarioRepository;
 import com.generation.hooda.service.UsuarioService;
 
