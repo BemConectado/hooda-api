@@ -2,10 +2,10 @@ FROM openjdk:17.0.1-jdk-oracle as build
 
 WORKDIR /workspace/app
 
-COPY blogpessoal/mvnw .
-COPY blogpessoal/.mvn .mvn
-COPY blogpessoal/pom.xml .
-COPY blogpessoal/src src
+COPY hooda-api/mvnw .
+COPY hooda-api/.mvn .mvn
+COPY hooda-api/pom.xml .
+COPY hooda-api/src src
 
 RUN chmod -R 777 ./mvnw
 
@@ -23,4 +23,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.generation.blogpessoal.BlogpessoalApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.generation.hooda-api.HoodaApplication"]
